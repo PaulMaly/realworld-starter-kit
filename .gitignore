@@ -10,8 +10,11 @@
 .classpath
 *.launch
 .settings/
-
+.vcode/
 
 #System Files
 .DS_Store
 Thumbs.db
+
+now.json
+npm-debug.log

@@ -1,0 +1,5 @@
+{
+    "backendURL": "https://conduit.productionready.io",
+    "timeout": 3000,
+    "https": true
+}
