@@ -18,3 +18,4 @@ Thumbs.db
 
 now.json
 npm-debug.log
+/dist

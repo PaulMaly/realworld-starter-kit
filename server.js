@@ -1,9 +1,7 @@
 const express = require('express'),
 	helmet = require('helmet'),
 	compress = require('compression'),
-	serve = require('serve-static'),
 	cons = require('consolidate'),
-	bodyParser = require('body-parser'),
 	methodOverride = require('method-override'),
 	session = require('express-session');
 
@@ -24,12 +22,12 @@ server.set('view engine', 'html');
 server.use(helmet());
 server.use(session(config.session));
 
-server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({ extended: true }));
+server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
 server.use(methodOverride('_method'));
 
 server.use(compress({ threshold: 0 }));
-server.use(serve('dist'));
+server.use(express.static('dist'));
 
 server.use(req());
 
