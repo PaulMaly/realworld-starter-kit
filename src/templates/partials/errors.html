@@ -1,0 +1,7 @@
+<ul class="error-messages">
+{{#errors}}
+    {{#each this as err}}
+    <li>{{ @key }} {{ err }}</li>
+    {{/each}}
+{{/errors}}
+</ul>

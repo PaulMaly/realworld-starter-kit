@@ -24,13 +24,21 @@
         </style>
     </head>
     <body>
+        
+        {{#error}}
+        <div class="alert alert-danger">{{ error }}</div>
+        {{/error}}
 
         <div id="app">
             {{& content }}
         </div>
 
         <script>
-            window.msgEl = document.getElementById('msg');
+            window.pageEl = document.getElementById('page');
+        </script>
+
+        <script>
+            window.__DATA__ = {{& data }}
         </script>
 
     </body>

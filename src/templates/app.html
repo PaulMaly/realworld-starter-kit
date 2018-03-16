@@ -1,0 +1,46 @@
+<div id="page">
+
+{{>navbar}}
+
+{{#with @shared.$route as $route }}
+{{#if $route.match('/login')}}
+<div fade-in-out>
+    <div class="alert alert-info"><strong>Login</strong>. {{message}}</div>
+</div>
+{{elseif $route.match('/register')}}
+<div fade-in-out>
+    <div class="alert alert-info"><strong>Register</strong>. {{message}}</div>
+</div>
+{{elseif $route.match('/')}}
+<div fade-in-out>
+    <div class="alert alert-info">
+        <strong>Hello, {{fullName}}!</strong> You successfully read please <a href="/login" class="alert-link">login</a>.
+    </div>
+    {{#await articles}}
+        <div class="alert alert-light">Loading articles...</div>
+    {{then data}}
+        <div class="list-group">
+        {{#each data.articles as article}}
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ article.title }}</h5>
+                    <small>{{ formatDate(article.createdAt) }}</small>
+                </div>
+            </div>
+        {{else}}
+            <div class="list-group-item">No articles are here... yet.</div>
+        {{/each}}
+        </div>
+    {{catch errors}}
+        {{>errors}}
+    {{/await}}
+</div>
+{{else}}
+<div fade-in-out>
+    <p>404 page</p>
+</div>  
+{{/if}}
+{{/with}}
+
+{{>footer}}
+</div>

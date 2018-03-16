@@ -1,0 +1,52 @@
+{
+  "/" : {
+    "title": "Global Feed",
+    "description": "",
+    "keywords": ""
+  },
+  "/feed" : {
+    "title": "Your Feed",
+    "description": "",
+    "keywords": ""
+  },
+  "/login" : {
+    "title": "Sign in",
+    "description": "",
+    "keywords": ""
+  },
+  "/register" : {
+    "title": "Sign up",
+    "description": "",
+    "keywords": ""
+  },
+  "/settings" : {
+    "title": "Your Settings",
+    "description": "",
+    "keywords": ""
+  },
+  "/editor/:slug?" : {
+    "title": "Create Article",
+    "description": "",
+    "keywords": ""
+  },
+  "/article/:slug" : {
+    "title": "Article",
+    "description": "",
+    "keywords": ""
+  },
+  "/profile/:username/:section?" : {
+    "title": "Profile",
+    "description": "",
+    "keywords": ""
+  },
+  "400" : {
+    "title": "400 Error",
+    "description": "The server could not understand the request due to invalid syntax.",
+    "keywords": ""
+  },
+  "403" : {
+    "title": "403 Error",
+    "description": "The client does not have access rights to the content, i.e. they are unauthorized, so server is rejecting to give proper response.",
+    "keywords": ""
+  }
+}

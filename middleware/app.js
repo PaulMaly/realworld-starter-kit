@@ -2,13 +2,20 @@ const run = require('../src/app');
 
 module.exports = () => (req, res, next) => {
 
-	const app = run();
-	
-	const meta = { title: 'Hello world', description: '', keywords: '' },
-		content = app.toHTML(),
-		styles = app.toCSS();
+	const app = run(),
+		route = app.$page.show(req.url, null, true, false);
 
-	app.teardown();
+	app.ready((error, data) => {
 
-	res.render('index', { meta, content, styles });
+		const meta = route.state.meta,
+			content = app.toHTML(),
+			styles = app.toCSS();
+
+		app.teardown();
+		
+		data = JSON.stringify(data || {});
+		error = error && error.message ? error.message : error;
+		
+		res.render('index', { meta, content, styles, data, error });
+    });
 };

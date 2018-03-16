@@ -1,0 +1,24 @@
+<nav class="navbar navbar-light">
+    <div class="container">
+       {{#with @shared.$route.pathname as pathname}}
+        <a class="navbar-brand" href="/">conduit</a>
+        <ul class="nav navbar-nav pull-xs-right">
+            <li class="nav-item">
+                <a href="/" class-active="pathname  === '/'" class="nav-link">
+                    Home
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/login" class-active="pathname  === '/login'" class="nav-link">
+                    Sign in
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/register" class-active="pathname === '/register'" class="nav-link">
+                    Sign up
+                </a>
+            </li>
+        </ul>
+        {{/with}}
+    </div>
+</nav>
