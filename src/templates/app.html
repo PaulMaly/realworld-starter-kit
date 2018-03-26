@@ -1,46 +1,38 @@
-<div id="page">
-
 {{>navbar}}
 
-{{#with @shared.$route as $route }}
-{{#if $route.match('/login')}}
-<div fade-in-out>
-    <div class="alert alert-info"><strong>Login</strong>. {{message}}</div>
-</div>
-{{elseif $route.match('/register')}}
-<div fade-in-out>
-    <div class="alert alert-info"><strong>Register</strong>. {{message}}</div>
-</div>
-{{elseif $route.match('/')}}
-<div fade-in-out>
-    <div class="alert alert-info">
-        <strong>Hello, {{fullName}}!</strong> You successfully read please <a href="/login" class="alert-link">login</a>.
-    </div>
-    {{#await articles}}
-        <div class="alert alert-light">Loading articles...</div>
-    {{then data}}
-        <div class="list-group">
-        {{#each data.articles as article}}
-            <div class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{ article.title }}</h5>
-                    <small>{{ formatDate(article.createdAt) }}</small>
-                </div>
-            </div>
-        {{else}}
-            <div class="list-group-item">No articles are here... yet.</div>
-        {{/each}}
-        </div>
-    {{catch errors}}
-        {{>errors}}
-    {{/await}}
-</div>
+{{#with 
+  @shared.$route as $route, 
+  {delay: 500} as fadeIn, 
+  {duration: 200} as fadeOut 
+}}
+<div class="page">
+  
+{{#if $route.match('/login') }}
+  <div class="auth-page" fade-in="fadeIn" fade-out="fadeOut">
+    Login page
+  </div>
+{{elseif $route.match('/register') }}
+  <div class="auth-page" fade-in="fadeIn" fade-out="fadeOut">
+    Register page
+  </div>
+{{elseif $route.match('/profile/:username/:section?') }}
+  <div class="profile-page" fade-in="fadeIn" fade-out="fadeOut">
+    <profile 
+      username="{{ $route.params.username }}" 
+      section="{{ $route.params.section }}"
+    />
+  </div>
+{{elseif $route.match('/') }}
+  <div class="home-page" fade-in="fadeIn" fade-out="fadeOut">
+    {{>homepage}}
+  </div>
 {{else}}
-<div fade-in-out>
-    <p>404 page</p>
-</div>  
+  <div class="notfound-page" fade-in="fadeIn" fade-out="fadeOut">
+    {{>notfound}}
+  </div>
 {{/if}}
+
+</div>
 {{/with}}
 
 {{>footer}}
-</div>

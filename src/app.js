@@ -6,6 +6,7 @@ Ractive.DEBUG_PROMISES = Ractive.DEBUG;
 Ractive.defaults.enhance = true;
 Ractive.defaults.lazy = true;
 Ractive.defaults.sanitize = true;
+Ractive.defaults.snapshot = '@global.__DATA__';
 
 Ractive.defaults.data.formatDate = require('./helpers/formatDate');
 Ractive.defaults.data.errors = null;
@@ -24,34 +25,20 @@ const options = {
     template: require('./templates/parsed/app'),
     partials: {
         navbar: require('./templates/parsed/navbar'),
-        footer: require('./templates/parsed/footer')
+        footer: require('./templates/parsed/footer'),
+        homepage: require('./templates/parsed/homepage'),
+        notfound: require('./templates/parsed/notfound')
     },
     transitions: {
         fade: require('ractive-transitions-fade'),
     },
-    data: {
-        message: 'Hello world',
-        firstName: 'Habr',
-        lastName: 'User',
-        articles: []
+    components: {
+        tags: require('./components/Tags'),
+        articles: require('./components/Articles'),
+        profile: require('./components/Profile'),
     },
     computed: {
-        fullName() {
-            return this.get('firstName') + ' ' + this.get('lastName');
-        }
-    },
-    oninit () {
-
-        const key = 'articlesList';
-        
-        let articles = this.get(`@global.__DATA__.${key}`);
-        
-        if ( ! articles ) {
-            articles = api.articles.fetchAll();
-            this.wait(articles, key);
-        }
-
-        this.set('articles', articles);
+        tags: require('./computed/tags')
     }
 };
 

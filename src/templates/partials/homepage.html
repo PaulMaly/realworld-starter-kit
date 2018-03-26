@@ -1,0 +1,37 @@
+<div class="banner">
+  <div class="container">
+    <h1 class="logo-font">conduit</h1>
+    <p>A place to share your knowledge.</p>
+  </div>
+</div>
+<div class="container page">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="feed-toggle">
+        <ul class="nav nav-pills outline-active">
+          <li class="nav-item">
+            <a href="/" class-active="$route.pathname === '/' && !$route.query.tag" class="nav-link">
+              Global Feed
+            </a>
+          </li>
+          {{#if $route.query.tag }}
+          <li class="nav-item">
+            <a class="nav-link active">
+                # {{ $route.query.tag }}
+            </a>
+          </li>
+          {{/if}}
+        </ul>
+      </div>
+
+      <articles params="{{ $route.query }}"/>
+      
+    </div>
+    <div class="col-md-3">
+      <div class="sidebar">
+        <p>Popular Tags</p>
+        <tags tags="{{ tags }}" skin="filled" />
+      </div>
+    </div>
+  </div>
+</div>

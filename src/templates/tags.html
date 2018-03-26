@@ -1,0 +1,17 @@
+{{#await tags}}
+	<p>Loading...</p>
+{{then tags}}
+	<ul class="tag-list">
+	{{#each tags as tag}}
+		<li>
+			<a href="/?tag={{tag}}" class="tag-pill tag-default tag-{{~/skin}}">
+				{{tag}}
+			</a>
+		</li>
+	{{/each}}
+	</ul>
+{{catch errors}}
+  {{>errors}}
+{{else}}
+  <p>No tags</p>
+{{/await}}

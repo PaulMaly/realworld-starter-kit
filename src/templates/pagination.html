@@ -1,0 +1,13 @@
+{{#if total > 0 && pages.length > 1}}
+<nav>
+  <ul class="pagination">
+  {{#each pages as page}}
+    <li class-active="isCurrent(page)" class="page-item">
+      <a href="?{{ @shared.$route.join('offset', getOffset(page)) }}" class="page-link">
+        {{ page }}
+      </a>
+    </li>
+  {{/each}}
+  </ul>
+</nav>
+{{/if}}

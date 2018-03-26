@@ -1,0 +1,50 @@
+<div class="articles-list">
+{{#await articles}}
+  <div class="article-preview">
+    <p>Loading articles...</p>
+  </div>
+{{then data}}
+
+  {{#each data.articles as article}}
+  <div class="article-preview">
+    <div class="article-meta">
+      <a href="/profile/{{ article.author.username }}">
+        <img src="{{ article.author.image }}" />
+      </a>
+      <div class="info">
+        <a href="/profile/{{ article.author.username }}" class="author">
+          {{ article.author.username }}
+        </a>
+        <span class="date">{{ formatDate(article.createdAt) }}</span>
+      </div>
+    </div>
+    <a href="/article/{{ article.slug }}" class="preview-link">
+      <h1>{{ article.title }}</h1>
+      <p>{{ article.description }}</p>
+      <span>Read more...</span>
+
+      <tags tags="{{ article.tagList }}"/>
+    </a>
+  </div>
+  {{else}}
+  <div class="article-preview">
+    <p>No articles are here... yet.</p>
+  </div>
+  {{/each}}
+
+  <pagination 
+    total="{{ data.articlesCount }}" 
+    offset="{{ @shared.$route.query.offset || 0 }}" 
+    limit="20"
+  />
+
+{{catch errors}}
+  <div class="article-preview">
+    {{>errors}}
+  </div>
+{{else}}
+  <div class="article-preview">
+    <p>No articles are here... yet.</p>
+  </div>
+{{/await}}
+</div>

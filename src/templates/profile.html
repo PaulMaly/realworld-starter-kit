@@ -1,0 +1,47 @@
+<div class="profile">
+{{#await profile}}
+{{then profile}}
+  <div class="user-info">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-md-10 offset-md-1">
+          <img src="{{ profile.image }}" class="user-img" />
+          <h4>{{ profile.username }}</h4>
+          <p>{{ profile.bio }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{{catch errors}}
+  {{>errors}}
+{{/await}}
+
+{{#if username}}
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-10 offset-md-1">
+
+        <div class="articles-toggle">
+          <ul class="nav nav-pills outline-active">
+            <li class="nav-item">
+              <a href="/profile/{{ username }}" class-active="!section" class="nav-link">
+                My Articles
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/profile/{{ username }}/favorites" class-active="section === 'favorites'" class="nav-link">
+                Favorited Articles
+              </a>
+            </li>
+          </ul>
+        </div>
+ 
+        <articles 
+          params="{{ section === 'favorites' ? {favorited: username} : {author: username} }}"
+        />
+              
+      </div>
+    </div>
+  </div>
+{{/if}}
+</div>
